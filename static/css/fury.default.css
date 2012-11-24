@@ -1,0 +1,177 @@
+body{
+    background:#DDD;
+    font-family:Arial;
+    color:#000;
+    margin:0px;
+    padding:0px;
+}
+
+/** Site CSS **/
+.site_wrapper
+{
+    width:1004px;
+    margin:10px auto;
+    padding:10px;
+    background:#FFF;
+    border-radius:5px;
+}
+
+.site_header
+{
+    height:50px;
+    background:#04426d;
+    width:100%;
+    text-indent:10px;
+    line-height:50px;
+    color:#FFF;
+    font-size:16px;
+    font-weight:bold;
+    border-bottom:1px dashed #999;
+}
+
+.site_footer
+{
+    height:50px;
+    background:#04426d;
+    width:100%;
+    line-height:50px;
+    color:#FFF;
+    font-size:16px;
+    font-weight:bold;
+    border-top:1px dashed #999;
+    text-align:center;
+}
+
+h1
+{
+    color:#FF0000;
+}
+
+input[type=text]
+{
+    border:1px solid #000;
+    border-radius:5px;
+    padding:5px;
+    font-size:15px;
+    color:#000;
+    font-weight:bold;
+    background:#FFF;
+    width:969px;
+}
+
+textarea
+{
+    width: 100%;
+    border:1px solid #000;
+    border-radius:5px;
+    padding:5px;
+    font-size:15px;
+    color:#000;
+    font-weight:bold;
+    background:#FFF;
+    width:969px;
+    resize:none;
+    height:250px;
+    font-family:Arial;
+}
+
+input[type=submit]
+{
+    padding:5px 12px;
+    border:1px solid #000;
+    border-radius:5px;
+    cursor:pointer;
+    color:#000;
+    background:#FFF;
+    font-size:15px;
+    float:right;
+}
+
+.clear
+{
+    clear:both;
+}
+
+input[type=submit]:hover
+{
+    background:#DDD;
+}
+
+.alert
+{
+    width:100%;
+    border-radius:5px;
+    color:#FFF;
+    height:50px;
+    line-height:50px;
+    text-indent:10px;
+    font-size:14px;
+    margin-bottom:10px;
+}
+
+.green
+{
+    background:#197b06;
+}
+
+.yellow
+{
+    background:#e2e502;
+    color:#000;   
+}
+
+.infobox
+{
+    width:982px;
+    background:#fbfbe3;
+    border:1px dashed #444;
+    color:#000;
+    margin-bottom:10px;
+    padding:10px;
+}
+
+.site_welcome
+{
+    width:982px;
+    background:#fbfbe3;
+    border:1px dashed #444;
+    color:#000;
+    margin-bottom:10px;
+    padding:10px;
+    text-align:center;
+    margin-top:10px;
+}
+
+#error-container{
+    width:400px;
+    height:150px;
+    background:#FFF;
+    border-radius:5px;
+    border:1px solid #222;
+    box-shadow:0px 0px 12px #222;
+    position:absolute;
+    top:50%;
+    left:50%;
+    margin-left:-200px;
+    margin-top:-75px;
+}
+
+#error-title{
+    width:100%;
+    height:40px;
+    text-indent:10px;
+    line-height:40px;
+    color:#FFF;
+    background:#555;
+    font-size:15px;
+}
+
+#error-content{
+    width:100%;
+    height:110px;
+    font-size:18px;
+    font-weight:bold;
+    color:#000;
+    text-align:center;
+    line-height:110px;
+}
