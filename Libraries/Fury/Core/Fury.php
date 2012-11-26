@@ -32,12 +32,10 @@
             TaskManager::LoadClass('DebugManager', 'Managers');
             //Load the Database:
             TaskManager::LoadClass('Database', 'Database');
-            //Load the Smarty Template:
-            TaskManager::LoadClass('Smarty', 'View/Smarty');
-            //Initiate Smarty:
-            TaskManager::InitiateSmarty();
             //Load the Plugin Manager:
             TaskManager::LoadClass('PluginManager', 'Managers');
+            //Load View:
+            TaskManager::LoadClass('Html', 'View');
             //Load Plugins
             PluginManager::LoadPlugins();
             //Load the Controller Class:

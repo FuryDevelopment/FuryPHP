@@ -42,7 +42,7 @@
                 TaskManager::LoadClass('Model', 'Model');
                 $Model = new Model;
                 //Call the Model now that we know the controller exists.
-                Model::ProcessModel(self::CurrentController(), self::CurrentAction());
+                $Model->ProcessModel(self::CurrentController(), self::CurrentAction());
             }
             else
             {

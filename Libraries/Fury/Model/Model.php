@@ -25,6 +25,7 @@
         static $showView   = true;
         public $Session    = null;
         public $data       = null;
+        static $vars       = array();
         
         /**
          * Class constructor. This will setup
@@ -35,14 +36,13 @@
             TaskManager::LoadClass('Data', 'Model/Data');
             $this->data = new Data;
         }
-    
         /**
          * Method to process the Model. We pass multiple
          * parameters here to check:
          * @param: Model -> Extender Class to call
          * @param: Action -> Extender Method to call
          **/
-        public static function ProcessModel($Model, $Action)
+        public function ProcessModel($Model, $Action)
         {
             
             //Check if we can load the model
@@ -62,7 +62,7 @@
                     if(self::$showHeader)
                     {
                         //Try loading it
-                        if(!TaskManager::LoadHeader())
+                        if(!$this->load(APP_HEADER_VIEW))
                         {
                             //If it doesnt load, let them know:
                             LogManager::File('Header was unable to be loaded.');
@@ -74,7 +74,8 @@
                     if(self::$showView)
                     {
                         //Try loading the View for the current Model
-                        if(!TaskManager::LoadView($Model, $Action))
+                        $file = APPLICATION_DIR . D . "Modules" . D  . $Model . D . "Views" . D . $Action . '.tpl';
+                        if(!$this->load($file))
                         {
                             //If it doesnt load, let them know:
                             LogManager::File('"' . $Action . '" was unable to be found.');
@@ -83,7 +84,7 @@
                     }
                           
                     //If displaying Header:  
-                    if(self::$showFooter)
+                    if(!$this->load(APP_FOOTER_VIEW))
                     {
                         //Try loading it:
                         if(!TaskManager::LoadFooter())
@@ -110,6 +111,22 @@
                 LogManager::File('"' . $Model . 'Model" was not found.');
                 TaskManager::LoadError404('"' . $Model . 'Model" was not found.');
             }
+        }
+
+
+        /**
+         * Method to load the 
+         * template files
+         */
+        public function load($file)
+        {
+            if(file_exists($file)){
+                include_once($file);
+                return true;
+            //If it doesnt exist, return false.
+            }else{
+                return false;
+            } 
         }
         
         
@@ -158,12 +175,23 @@
         }
         
         /**
-         * Method to show footer or not.
-         * We make this optional.
+         * Method to set all variables
+         * for template
          **/
         public function set($var, $value)
         {
-            TaskManager::$Smarty->assign($var, $value);
+            self::$vars[$var] = $value;
+        }
+
+        /**
+         * Method to get all variables
+         * for template
+         **/
+        public function get($var)
+        {
+            if(array_key_exists($var, self::$vars))
+                return self::$vars[$var];
+            
         }
         
         //------------------------------------------------------

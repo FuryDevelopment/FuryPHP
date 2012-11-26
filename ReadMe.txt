@@ -10,7 +10,6 @@ Release Information:
 
     - Initial Release
     - Utilizes MVC (Model, View, Controller) Structure.
-    - Uses Smarty Template Engine for Views.
     - New Plugin System
     - No requirement to touch the .htaccess
 
