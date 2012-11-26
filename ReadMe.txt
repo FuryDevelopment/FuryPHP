@@ -6,12 +6,16 @@
 #################################
 
 
+CURRENT VERSION: 1.0.6 DEVELOPMENT:
+
+
 Release Information:
 
-    - Initial Release
-    - Utilizes MVC (Model, View, Controller) Structure.
-    - New Plugin System
-    - No requirement to touch the .htaccess
+    - Rewrote the View Engine
+      -> Removed Smarty Engine due to non-compatibility with PHP 5.4.9
+    - Updated the Module system.
+    - Changed all template file types to ".php".
+    - Updated the Variable system within models. (Read Documenation).
 
 
 Documentation:

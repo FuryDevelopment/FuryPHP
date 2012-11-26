@@ -74,7 +74,7 @@
                     if(self::$showView)
                     {
                         //Try loading the View for the current Model
-                        $file = APPLICATION_DIR . D . "Modules" . D  . $Model . D . "Views" . D . $Action . '.tpl';
+                        $file = APPLICATION_DIR . D . "Modules" . D  . $Model . D . "Views" . D . $Action . VIEW_FILE_TYPE;
                         if(!$this->load($file))
                         {
                             //If it doesnt load, let them know:

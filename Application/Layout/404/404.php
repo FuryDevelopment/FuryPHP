@@ -1,7 +1,7 @@
 <?php Html::doctype('html') ?>
 <html>
     <head>
-        <title>{Html::$site_title}: Error 404</title>
+        <title><?php echo Html::$site_title ?>: Error 404</title>
         <?php Html::css('fury.default') ?>
     </head>
     <body>

@@ -38,38 +38,23 @@
     //Default Controller Method:
     if(!defined('MODULES_DIR'))
          define('MODULES_DIR',               APPLICATION_DIR . D . "Modules" . D);
+    //View File Type
+    if(!defined('VIEW_FILE_TYPE'))
+         define('VIEW_FILE_TYPE',            ".php");
     //Default Controller Method:
     if(!defined('APP_HEADER_VIEW'))
-         define('APP_HEADER_VIEW',           APPLICATION_DIR . D . "Layout" . D . "Header.tpl");
+         define('APP_HEADER_VIEW',           APPLICATION_DIR . D . "Layout" . D . "Header" . VIEW_FILE_TYPE);
     //Default Controller Method:
     if(!defined('APP_FOOTER_VIEW'))
-         define('APP_FOOTER_VIEW',           APPLICATION_DIR . D . "Layout" . D . "Footer.tpl");
+         define('APP_FOOTER_VIEW',           APPLICATION_DIR . D . "Layout" . D . "Footer" . VIEW_FILE_TYPE);
     //Default Controller Method:
     if(!defined('APP_ERROR_404'))
-         define('APP_ERROR_404',             APPLICATION_DIR . D . "Layout/404" . D . "404.tpl");
+         define('APP_ERROR_404',             APPLICATION_DIR . D . "Layout/404" . D . "404" . VIEW_FILE_TYPE);
     //Smarty Template Directory
     if(!defined("SMARTY_TEMPLATE_DIRECTORY"))
          define("SMARTY_TEMPLATE_DIRECTORY", MODULES_DIR);
     //Template Cache Directory
     if(!defined("APP_LOG_DIRECTORY"))
-         define("APP_LOG_DIRECTORY",      APPLICATION_DIR . D . "Temp" . D . "Logs");
-    //Template Cache Directory
-    if(!defined("TEMP_CACHE_DIRECTORY"))
-         define("TEMP_CACHE_DIRECTORY",      APPLICATION_DIR . D . "Temp" . D . "Tpl_Cache");
-    //Smarty Cache Directory
-    if(!defined("SMARTY_CACHE_DIRECTORY"))
-         define("SMARTY_CACHE_DIRECTORY",    APPLICATION_DIR . D . "Temp" . D . "Cache");
-    //Smarty Configs Directory
-    if(!defined("SMARTY_CONFIGS_DIRECTORY"))
-         define("SMARTY_CONFIGS_DIRECTORY",  APPLICATION_DIR . D . "Temp" . D . "Configs");
-    //Smarty Debugging
-    if(!defined("SMARTY_DEBUGGING"))
-         define("SMARTY_DEBUGGING",          false);
-    //Smarty Caching
-    if(!defined("SMARTY_CACHING"))
-         define("SMARTY_CACHING",            false);
-    //Smarty Cache Lifetime
-    if(!defined("SMARTY_CACHE_LIFETIME"))
-         define("SMARTY_CACHE_LIFETIME",     60);
+         define("APP_LOG_DIRECTORY",         APPLICATION_DIR . D . "Temp" . D . "Logs");
          
 ?>

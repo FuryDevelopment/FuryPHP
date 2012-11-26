@@ -18,5 +18,5 @@
                                      'password' => '',      //Password
                                      'database' => '',      //Database
                                      'prefix'   => '');     //Prefix
-                                 
+
 ?>
