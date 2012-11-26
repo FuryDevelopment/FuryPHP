@@ -12,22 +12,20 @@
     * ------------------------------------------------------------------
     **/
     
-
+    //Model Class.
     class IndexModel extends Model
     {
+        /**
+         * Construct Method
+         **/
         public function __construct()
         {
-            //Required:
             parent::__construct();
-            
-            //To enable sessions
-            //=========================
-            //1st param: If we are using sessions
-            //2nd param: If we are saving in db
-            $this->useSessions(true, false);
-            //=========================
         }
         
+        /**
+         * Default Action
+         **/
         public function index()
         {
             //Below are variables set for the FuryPHP Default Page

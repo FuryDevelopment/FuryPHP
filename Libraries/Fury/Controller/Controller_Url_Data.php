@@ -11,6 +11,15 @@
     * @license: (http://www.opensource.org/licenses/mit-license.php)
     * ------------------------------------------------------------------
     **/
+
+   /**
+    * @todo:
+    * I need to re-write the checking of
+    * the post variables. I can eliminate
+    * quite a few lines by doing a if
+    * statement just for the isset() for
+    * the $_GET variables.
+    **/
     
     /**
      * This classes sole reason is to

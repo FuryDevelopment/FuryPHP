@@ -35,19 +35,36 @@
         Database::selectDB();
     }
     
+    /**
+     * Start the Database Class
+     **/
     class Database
     {
-        
+        //Set a variable for the connection
         public static $connection = NULL;
+        //Set a variable for the result.
         public static $result     = false;
+        //Set a variable for whether we can
+        //connect or not.
         public static $allowConnection = NULL;
         
+        /*
+            ---------------------------------------------
+           |     Function: init                          |
+           |     Description: Sets up the Database       |
+           |                   class.                    |
+            ---------------------------------------------
+            
+        */
         public static function init()
         {
+            //Check if the SQL Variables are empty
+            //or not.
             if(!empty($GLOBALS['SQL_DATABASE']['host']) &&
                !empty($GLOBALS['SQL_DATABASE']['database'])&&
                !empty($GLOBALS['SQL_DATABASE']['user'])){
-                
+                //if they are not empty,
+                //that means we can connect.
                 self::$allowConnection = true;
             }
         }
@@ -62,13 +79,16 @@
             
         */
         public static function connect(){
+            //If the connection is not allowed:
             if(!self::$allowConnection)
             {
+                //Tell them that we are not allowed to connect to due to missing information
                 trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
                 die();
             }
             else
             {
+                //If we are allowed to connect, do just that.
                 if(!self::$connection = mysql_connect($GLOBALS['SQL_DATABASE']['host'], 
                                                       $GLOBALS['SQL_DATABASE']['user'], 
                                                       $GLOBALS['SQL_DATABASE']['password'])){

@@ -12,9 +12,23 @@
     * ------------------------------------------------------------------
     **/
     
-    //Do Global Overwrites here:
-    //define("SITE_TITLE", "");
+    //Site Title:
+    //define("SITE_TITLE", "Testing");
+    
+    //Site URL:
     //define("SITE_URL",   "");
-    define("RANDOM_CRYPT_STRING", "RandomStringHere1234567890"); //Change this.
+    
+    //Static URL:
+    //define("STATIC_URL", "");
+    
+    /**
+     * Crypt String:
+     * This will be the string used to create unique ids.
+     * Change this string to something random containing only
+     * letters and numbers.
+     * IT IS IN YOUR BEST INTEREST IN TERMS OF SECURITY TO 
+     * CHANGE THIS STRING.
+     **/
+    define("RANDOM_CRYPT_STRING", "asdf2893thuebgfhasdbgy82038gbv");
     
 ?>

@@ -14,14 +14,21 @@
     
     class PluginManager
     {
-        
+        /**
+         * Function: LoadPlugins
+         * @info: Loads all plugins into the
+         *        system.
+         **/
         public static function LoadPlugins()
         {
+            //Load all files with the PHP filetype.
             $FileType = ".php";
+            //Setup the plugin DIR.
             $PluginDir = SYSTEM_ROOT . D . "Plugins" . D;
             //Iterate through each file and include it:
             foreach(glob($PluginDir . "*" . $FileType) as $Plugin)
             {
+                //Include the class only once.
                 include_once $Plugin;
             }
         }

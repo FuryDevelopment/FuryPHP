@@ -83,10 +83,13 @@
         public static function GetURL()
         {
             $pageURL = 'http';
+            //If it's a secure site:
             if (!empty($_SERVER['HTTPS'])) {$pageURL .= "s";}  
                 $pageURL .= "://";
+            //If the port is not 80
             if ($_SERVER["SERVER_PORT"] != "80") {
                 $pageURL .= $_SERVER["SERVER_NAME"].":".$_SERVER["SERVER_PORT"];
+            //Else just get the server name
             } else {
                 $pageURL .= $_SERVER["SERVER_NAME"];
             }
