@@ -1,8 +1,8 @@
-<?php Html::doctype('html') ?>
+{Html::doctype('html')}
 <html>
     <head>
-        <title><?php echo Html::$site_title ?>: Error 404</title>
-        <?php Html::css('fury.default') ?>
+        <title>{Html::$site_title}: Error 404</title>
+        {Html::css('fury.default')}
     </head>
     <body>
     
@@ -11,7 +11,7 @@
                 Uh-oh, FuryPHP has reached an error!
             </div>
             <div id="error-content">
-                <?php echo self::$error; ?>
+                {$error}
             </div>
         </div>
     
