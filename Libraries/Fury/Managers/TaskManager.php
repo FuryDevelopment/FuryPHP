@@ -146,8 +146,8 @@
         {
             //Let them know via Debug warning:
             $View = new View;
-            $View->Smarty->assign('error', $error);
-            $View->Smarty->load(APP_ERROR_404);
+            $View->smarty->assign('error', $error);
+            $View->smarty->load(APP_ERROR_404);
             die();   
         }
     }
