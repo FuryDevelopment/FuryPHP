@@ -2,8 +2,7 @@
 
    /**
     * FuryPHP Framework
-    * 
-    * @version: v1.0.1a                                                      
+    *                                                     
     * @author: Matt Grubb
     * @copyright: Copyright 2012, Matt Grubb, (http://www.furyphp.com)
     * @link: http://www.furyphp.com

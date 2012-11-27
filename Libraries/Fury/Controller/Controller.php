@@ -3,8 +3,7 @@
    /**
     * ------------------------------------------------------------------
     * FuryPHP Framework
-    * 
-    * @version: v1.0.0a                                                      
+    *                                                 
     * @author: Matt Grubb
     * @copyright: Copyright 2012, Matt Grubb, (http://www.furyphp.com)
     * @link: http://www.furyphp.com
@@ -40,9 +39,34 @@
             {
                 //We can now move on to loading the Model & View.
                 TaskManager::LoadClass('Model', 'Model');
-                $Model = new Model;
-                //Call the Model now that we know the controller exists.
-                Model::ProcessModel(self::CurrentController(), self::CurrentAction());
+                $Model  = self::CurrentController();
+                $Action = self::CurrentAction();
+
+
+                /**
+                 * VERSION 1.0.9 DEV CHANGE:
+                 * WE WILL NOW INITIALIZE THE MODEL FROM HERE.
+                 **/
+                //Check if we can load the model
+                if(TaskManager::LoadModel($Model))
+                {
+                    $ClassExtension = $Model . "Model";
+                    //Load this class:
+                    $ModelClass = new $ClassExtension;
+
+                    if(method_exists($ModelClass, $Action))
+                    {
+                        $ModelClass->$Action();
+                        $ModelClass->ProcessModel($Model, $Action);
+                    }
+                }
+                //If we were not able to load the model:
+                else
+                {
+                    //Let them know via Debug warning:
+                    LogManager::File('"' . $Model . 'Model" was not found.');
+                    TaskManager::LoadError404('"' . $Model . 'Model" was not found.');
+                }
             }
             else
             {

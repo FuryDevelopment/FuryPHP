@@ -3,8 +3,7 @@
    /**
     * ------------------------------------------------------------------
     * FuryPHP Framework
-    * 
-    * @version: v1.0.0a                                                      
+    *                                                      
     * @author: Matt Grubb
     * @copyright: Copyright 2012, Matt Grubb, (http://www.furyphp.com)
     * @link: http://www.furyphp.com
@@ -20,6 +19,14 @@
     
     //Static URL:
     //define("STATIC_URL", "");
+
+    //Set any Global Template variables here that you
+    //may need.
+    //$GLOBALS['TPL_VARIABLES'] = array('test' => 'testing',
+    //                                  'blah' => 'foobar');
+
+    //DEVELOPMENT VARIABLES:
+    //define("SMARTY_DEBUGGING", true);
     
     /**
      * Crypt String:

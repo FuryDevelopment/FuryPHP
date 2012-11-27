@@ -3,8 +3,7 @@
    /**
     * ------------------------------------------------------------------
     * FuryPHP Framework
-    * 
-    * @version: v1.0.0a                                                      
+    *                                                     
     * @author: Matt Grubb
     * @copyright: Copyright 2012, Matt Grubb, (http://www.furyphp.com)
     * @link: http://www.furyphp.com
@@ -140,89 +139,15 @@
         
         /**
          * ---------------------------------
-         * Smarty initializer:
-         * ---------------------------------
-         **/
-        public static function InitiateSmarty()
-        {
-            //Load the HTML Class:
-            TaskManager::LoadClass('Html', 'View');
-            //Set the static variable to the class
-            self::$Smarty = new Smarty;
-            //Configure Smarty:
-            //==========================================================================
-            self::$Smarty->setTemplateDir(SMARTY_TEMPLATE_DIRECTORY); // Do not change
-            self::$Smarty->setCompileDir (TEMP_CACHE_DIRECTORY); // Do not change
-            self::$Smarty->setCacheDir   (SMARTY_CACHE_DIRECTORY); // Do not change
-            self::$Smarty->setConfigDir  (SMARTY_CONFIGS_DIRECTORY); // Do not change
-            self::$Smarty->debugging      = SMARTY_DEBUGGING; // For development only. If enabled, a debug popup opens.
-            self::$Smarty->caching        = SMARTY_CACHING; // I have disabled caching for development reasons.
-            self::$Smarty->cache_lifetime = SMARTY_CACHE_LIFETIME; // Caching lifetime.
-            //==========================================================================
-        }
-        
-        /**
-         * ---------------------------------
-         * Load the Header
-         * ---------------------------------
-         **/
-        public static function LoadHeader()
-        {
-            //If it exists, load it and return true
-            if(file_exists(APP_HEADER_VIEW)){
-                self::$Smarty->display(APP_HEADER_VIEW);
-                return true;
-            //If it doesnt exist, return false.
-            }else{
-                return false;
-            }   
-        }
-        
-        /**
-         * ---------------------------------
-         * Load the View
-         * ---------------------------------
-         **/
-        public static function LoadView($Model, $Action)
-        {
-            $file = APPLICATION_DIR . D . "Modules" . D  . $Model . D . "Views" . D . $Action . '.tpl';
-            //If it exists, load it and return true
-            if(file_exists($file)){
-                self::$Smarty->display($file);
-                return true;
-            //If it doesnt exist, return false.
-            }else{
-                return false;
-            }   
-        }
-        
-        /**
-         * ---------------------------------
-         * Load the Footer
-         * ---------------------------------
-         **/
-        public static function LoadFooter()
-        {
-            //If it exists, load it and return true
-            if(file_exists(APP_FOOTER_VIEW)){
-                self::$Smarty->display(APP_FOOTER_VIEW);
-                return true;
-            //If it doesnt exist, return false.
-            }else{
-                return false;
-            }   
-        }
-        
-        /**
-         * ---------------------------------
          * Load the Footer
          * ---------------------------------
          **/
         public static function LoadError404($error)
         {
             //Let them know via Debug warning:
-            self::$Smarty->assign('error', $error);
-            self::$Smarty->display(APP_ERROR_404);
+            $View = new View;
+            $View->Smarty->assign('error', $error);
+            $View->Smarty->load(APP_ERROR_404);
             die();   
         }
     }

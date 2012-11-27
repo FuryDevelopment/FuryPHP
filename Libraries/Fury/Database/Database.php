@@ -3,8 +3,7 @@
    /**
     * ------------------------------------------------------------------
     * FuryPHP Framework
-    * 
-    * @version: v1.0.0a                                                      
+    *                                                      
     * @author: Matt Grubb
     * @copyright: Copyright 2012, Matt Grubb, (http://www.furyphp.com)
     * @link: http://www.furyphp.com
@@ -12,63 +11,18 @@
     * ------------------------------------------------------------------
     **/
     
-   /**
-    * Check here if we have a database file to include from the
-    * application's Config folder. If we don't, then we need to set 
-    * the allow connection to false to prevent any kind of connection.
-    **/
-    define('DATABASE_FILE', APPLICATION_DIR . D . 'Config' . D . 'Database.php');
-    
-    if(!file_exists(DATABASE_FILE))
-    {
-        Database::$allowConnection = false;
-    }
-    
-   /**
-    * If we do have an allowed connection, set it under here.
-    **/
-    else
-    {
-        include(DATABASE_FILE);
-        Database::init();
-        Database::connect();
-        Database::selectDB();
-    }
-    
     /**
      * Start the Database Class
      **/
     class Database
     {
         //Set a variable for the connection
-        public static $connection = NULL;
+        public $connection = NULL;
         //Set a variable for the result.
-        public static $result     = false;
+        public $result     = false;
         //Set a variable for whether we can
         //connect or not.
-        public static $allowConnection = NULL;
-        
-        /*
-            ---------------------------------------------
-           |     Function: init                          |
-           |     Description: Sets up the Database       |
-           |                   class.                    |
-            ---------------------------------------------
-            
-        */
-        public static function init()
-        {
-            //Check if the SQL Variables are empty
-            //or not.
-            if(!empty($GLOBALS['SQL_DATABASE']['host']) &&
-               !empty($GLOBALS['SQL_DATABASE']['database'])&&
-               !empty($GLOBALS['SQL_DATABASE']['user'])){
-                //if they are not empty,
-                //that means we can connect.
-                self::$allowConnection = true;
-            }
-        }
-        
+        public $allowConnection = NULL;
         
         /*
             ---------------------------------------------
@@ -78,23 +32,13 @@
             ---------------------------------------------
             
         */
-        public static function connect(){
-            //If the connection is not allowed:
-            if(!self::$allowConnection)
-            {
-                //Tell them that we are not allowed to connect to due to missing information
-                trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
-                die();
-            }
-            else
-            {
-                //If we are allowed to connect, do just that.
-                if(!self::$connection = mysql_connect($GLOBALS['SQL_DATABASE']['host'], 
-                                                      $GLOBALS['SQL_DATABASE']['user'], 
-                                                      $GLOBALS['SQL_DATABASE']['password'])){
-                    trigger_error('Unable to connect to the database.'); 
-                    die();                                       
-                }
+        public function connect(){
+            //If we are allowed to connect, do just that.
+            if(!$this->connection = mysql_connect($GLOBALS['SQL_DATABASE']['host'], 
+                                                  $GLOBALS['SQL_DATABASE']['user'], 
+                                                  $GLOBALS['SQL_DATABASE']['password'])){
+                trigger_error('Unable to connect to the database.'); 
+                die();                                       
             }
         }
         
@@ -106,13 +50,8 @@
             ---------------------------------------------
             
         */
-        public static function selectDB(){
-            if(!self::$allowConnection)
-                trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
-            elseif(self::$connection == NULL)
-                trigger_error('Connection to the database failed. Please check your SQL Information.');
-            else
-                mysql_select_db($GLOBALS['SQL_DATABASE']['database']) or die(mysql_error());
+        public function selectDB(){
+            mysql_select_db($GLOBALS['SQL_DATABASE']['database']) or die(mysql_error());
         }
         
         /*
@@ -122,14 +61,9 @@
             ---------------------------------------------
             
         */
-        public static function escape_string($String){
-            if(!self::$allowConnection)
-                trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
-            elseif(self::$connection == NULL)
-                trigger_error('Connection to the database failed. Please check your SQL Information.');
-            else
-                $EscapeString = mysql_real_escape_string($String, self::$connection);
-                Return $EscapeString;
+        public function escape_string($String){
+            $EscapeString = mysql_real_escape_string($String, $this->connection);
+            Return $EscapeString;
         }
         
         /*
@@ -140,14 +74,9 @@
             ---------------------------------------------
             
         */
-        public static function query($Query){
-            if(!self::$allowConnection)
-                trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
-            elseif(self::$connection == NULL)
-                trigger_error('Connection to the database failed. Please check your SQL Information.');
-            else
-                self::$result = mysql_query($Query, self::$connection) or die(mysql_error());
-                Return self::$result;
+        public function query($Query){
+            $this->result = mysql_query($Query, $this->connection) or die(mysql_error());
+            Return $this->result;
         }
         
         /*
@@ -158,14 +87,9 @@
             ---------------------------------------------
             
         */
-        public static function fetch_array($Query){
-            if(!self::$allowConnection)
-                trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
-            elseif(self::$connection == NULL)
-                trigger_error('Connection to the database failed. Please check your SQL Information.');
-            else
-                $fetch = mysql_fetch_array($Query);
-                Return $fetch;
+        public function fetch_array($Query){
+            $fetch = mysql_fetch_array($Query);
+            Return $fetch;
         }
         
         /*
@@ -175,14 +99,9 @@
             ---------------------------------------------
             
         */
-        public static function num_rows($Query){
-            if(!self::$allowConnection)
-                trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
-            elseif(self::$connection == NULL)
-                trigger_error('Connection to the database failed. Please check your SQL Information.');
-            else
-                $num_rows = mysql_num_rows($Query);
-                Return $num_rows;
+        public function num_rows($Query){
+            $num_rows = mysql_num_rows($Query);
+            Return $num_rows;
         }
         
         /*
@@ -192,13 +111,8 @@
             ---------------------------------------------
             
         */
-        public static function Close(){
-            if(!self::$allowConnection)
-                trigger_error('Connection variables were not set. Refused to attempt connectivity to SQL.');
-            elseif(self::$connection == NULL)
-                trigger_error('Connection to the database failed. Please check your SQL Information.');
-            else
-                mysql_close(self::$connection);
+        public function Close(){
+             mysql_close($this->connection);
         }
         
     }

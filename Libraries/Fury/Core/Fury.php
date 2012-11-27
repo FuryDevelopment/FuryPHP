@@ -3,8 +3,7 @@
    /**
     * ------------------------------------------------------------------
     * FuryPHP Framework
-    * 
-    * @version: v1.0.0a                                                      
+    *                                                     
     * @author: Matt Grubb
     * @copyright: Copyright 2012, Matt Grubb, (http://www.furyphp.com)
     * @link: http://www.furyphp.com
@@ -32,10 +31,14 @@
             TaskManager::LoadClass('DebugManager', 'Managers');
             //Load the Database:
             TaskManager::LoadClass('Database', 'Database');
-            //Load the Smarty Template:
+            //Load the Database Manager
+            TaskManager::LoadClass('DataBaseManager', 'Managers');
+            //Load The Smarty Template Engine:
             TaskManager::LoadClass('Smarty', 'View/Smarty');
-            //Initiate Smarty:
-            TaskManager::InitiateSmarty();
+            //Load the HTML Class
+            TaskManager::LoadClass('Html', 'View');
+            //Load the View Class
+            TaskManager::LoadClass('View', 'View');
             //Load the Plugin Manager:
             TaskManager::LoadClass('PluginManager', 'Managers');
             //Load Plugins

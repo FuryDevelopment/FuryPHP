@@ -3,8 +3,7 @@
    /**
     * ------------------------------------------------------------------
     * FuryPHP Framework
-    * 
-    * @version: v1.0.0a                                                      
+    *                                                      
     * @author: Matt Grubb
     * @copyright: Copyright 2012, Matt Grubb, (http://www.furyphp.com)
     * @link: http://www.furyphp.com
@@ -19,12 +18,13 @@
     class Model
     {
         //Setup multiple variables we need:
-        static $ModelClass = null; //The Extender Class
-        static $showHeader = true; //Option to show header
-        static $showFooter = true; //Option to show footer.
-        static $showView   = true;
-        public $Session    = null;
+        public $showHeader = true; //Option to show header
+        public $showFooter = true; //Option to show footer.
+        public $showView   = true;
+        public $session    = null;
         public $data       = null;
+        public $view       = null;
+        public $sql        = null;
         
         /**
          * Class constructor. This will setup
@@ -34,6 +34,8 @@
         {
             TaskManager::LoadClass('Data', 'Model/Data');
             $this->data = new Data;
+            $this->view = new View;
+            $this->sql  = new DatabaseManager;
         }
     
         /**
@@ -42,73 +44,43 @@
          * @param: Model -> Extender Class to call
          * @param: Action -> Extender Method to call
          **/
-        public static function ProcessModel($Model, $Action)
+        public function ProcessModel($Model, $Action)
         {
-            
-            //Check if we can load the model
-            if(TaskManager::LoadModel($Model))
+
+            if($this->showHeader)
             {
-                //Set up the class extension title:
-                $ClassExtension = $Model . "Model";
-                //Load this class:
-                self::$ModelClass = new $ClassExtension;
-                //If the method exists
-                if(method_exists(self::$ModelClass, $Action))
+                //Try loading it
+                if(!$this->view->load(APP_HEADER_VIEW))
                 {
-                    //Call Class Method
-                    self::$ModelClass->$Action();
+                    //If it doesnt load, let them know:
+                    LogManager::File('Header was unable to be loaded.');
+                    DebugManager::Warning('Header was unable to be loaded.');
+                } 
+            } 
                     
-                    //If displaying Header:
-                    if(self::$showHeader)
-                    {
-                        //Try loading it
-                        if(!TaskManager::LoadHeader())
-                        {
-                            //If it doesnt load, let them know:
-                            LogManager::File('Header was unable to be loaded.');
-                            DebugManager::Warning('Header was unable to be loaded.');
-                        } 
-                    } 
-                    
-                    //If we are showing the view:
-                    if(self::$showView)
-                    {
-                        //Try loading the View for the current Model
-                        if(!TaskManager::LoadView($Model, $Action))
-                        {
-                            //If it doesnt load, let them know:
-                            LogManager::File('"' . $Action . '" was unable to be found.');
-                            DebugManager::Warning('"' . $Action . '" was unable to be found.');
-                        } 
-                    }
-                          
-                    //If displaying Header:  
-                    if(self::$showFooter)
-                    {
-                        //Try loading it:
-                        if(!TaskManager::LoadFooter())
-                        {
-                            //If it doesnt load, let them know.
-                            LogManager::File('Footer was unable to be loaded.');
-                            DebugManager::Warning('Footer was unable to be loaded.');
-                        }   
-                    }
-                        
-                }
-                //If it doesnt:
-                else
+            //If we are showing the view:
+            if($this->showView)
+            {
+                //Try loading the View for the current Model
+                $ViewFile = APPLICATION_DIR . D . "Modules" . D  . $Model . D . "Views" . D . $Action . '.tpl';
+                if(!$this->view->load($ViewFile))
                 {
-                    //Let them know via Debug Warning:
-                    LogManager::File('Action "' . $Action . '" was not found.');
-                    TaskManager::LoadError404('Action "' . $Action . '" was not found.');
-                }
+                    //If it doesnt load, let them know:
+                    LogManager::File('"' . $Action . '" was unable to be found.');
+                    DebugManager::Warning('"' . $Action . '" was unable to be found.');
+                } 
             }
-            //If we were not able to load the model:
-            else
+                          
+            //If displaying Header:  
+            if($this->showFooter)
             {
-                //Let them know via Debug warning:
-                LogManager::File('"' . $Model . 'Model" was not found.');
-                TaskManager::LoadError404('"' . $Model . 'Model" was not found.');
+                //Try loading it:
+                if(!$this->view->load(APP_FOOTER_VIEW))
+                {
+                    //If it doesnt load, let them know.
+                    LogManager::File('Footer was unable to be loaded.');
+                    DebugManager::Warning('Footer was unable to be loaded.');
+                }   
             }
         }
         
@@ -125,36 +97,9 @@
             if($sessions)
             {
                 TaskManager::LoadClass('Session', 'Model/Session');
-                $this->Session = new Session;
-                $this->Session->StartSession($dbsave);
+                $this->session = new Session;
+                $this->session->StartSession($dbsave);
             }
-        }
-        
-        /**
-         * Method to show the view or not.
-         * We make this optional.
-         **/
-        public function showView($show)
-        {
-            self::$showView = $show;
-        }
-        
-        /**
-         * Method to show header or not.
-         * We make this optional.
-         **/
-        public function showHeader($show)
-        {
-            self::$showHeader = $show;
-        }
-        
-        /**
-         * Method to show footer or not.
-         * We make this optional.
-         **/
-        public function showFooter($show)
-        {
-            self::$showFooter = $show;
         }
         
         /**
@@ -163,7 +108,7 @@
          **/
         public function set($var, $value)
         {
-            TaskManager::$Smarty->assign($var, $value);
+            $this->view->smarty->assign($var, $value);
         }
         
         //------------------------------------------------------
