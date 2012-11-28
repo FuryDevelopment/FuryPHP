@@ -1,8 +1,8 @@
-{Html::doctype('html')}
+{html::doctype('html')}
 <html>
     <head>
-        <title>{Html::$site_title}: Error 404</title>
-        {Html::css('fury.default')}
+        <title>{$site_title}: Error 404</title>
+        {html::css('fury.default')}
     </head>
     <body>
     

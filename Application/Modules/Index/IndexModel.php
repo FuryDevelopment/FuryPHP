@@ -14,7 +14,6 @@
     //Model Class.
     class IndexModel extends Model
     {
-        
         /**
          * Default Action
          **/

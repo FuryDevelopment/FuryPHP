@@ -36,7 +36,7 @@
             //Load The Smarty Template Engine:
             TaskManager::LoadClass('Smarty', 'View/Smarty');
             //Load the HTML Class
-            TaskManager::LoadClass('Html', 'View');
+            TaskManager::LoadClass('html', 'View');
             //Load the View Class
             TaskManager::LoadClass('View', 'View');
             //Load the Plugin Manager:

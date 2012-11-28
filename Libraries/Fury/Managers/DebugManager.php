@@ -28,6 +28,14 @@
         public static function Warning($text)
         {
             echo "<b>Warning: </b>" . $text . "<br />";
+            LogManager::File($text);
+        }
+
+        public static function Error($text)
+        {
+            echo "<b>Error: </b>" . $text . "<br />";
+            LogManager::File($text);
+            die();
         }
         
     }

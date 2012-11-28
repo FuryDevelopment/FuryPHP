@@ -19,16 +19,28 @@
 
     class DatabaseManager extends Database
     {
+        /**
+         * --------------------------------
+         * Class Constructor
+         * --------------------------------
+         **/
         public function __construct()
         {
+            //Setup the Database Configuration Location
             $DatabaseConfig = APPLICATION_DIR . D . 'Config' . D . 'Database.php';
+            //If the file exists:
             if(file_exists($DatabaseConfig))
             {
+                //Include it only once.
                 include_once($DatabaseConfig);
+                //If the configuration is valid:
                 if($this->ValidConfiguation())
                 {
+                    //Allow connection
                     $this->allowConnection = true;
+                    //Connect
                     $this->connect();
+                    //Select Database.
                     $this->selectDB();
                 }
                 else
@@ -41,6 +53,11 @@
         }
 
 
+        /**
+         * --------------------------------
+         * Configuration Validator
+         * --------------------------------
+         **/
         public function ValidConfiguation()
         {
             //Check if the SQL Variables are empty

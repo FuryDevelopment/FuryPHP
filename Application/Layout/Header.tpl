@@ -1,8 +1,8 @@
-{Html::doctype('html')}
+{html::doctype('html')}
 <html>
     <head>
         <title>{$site_title}</title>
-        {Html::css('fury.default')}
+        {html::css('fury.default')}
     </head>
     <body>
         <div class="site_wrapper">

@@ -17,16 +17,9 @@
      * This class can be called from inside
      * of the View Files.
      **/
-    class Html
+    class html
     {
-        
-        //Set variables for template usage:
-        //---------------------------------
-        static $site_title = SITE_TITLE;
-        static $site_url   = SITE_URL;
-        static $static_url = STATIC_URL;
-        //---------------------------------
-        
+
         /**
          * Use this method to automatically output
          * a doctype.
@@ -89,13 +82,15 @@
             //Check which input it is:
             switch ($type)
             {
-                //If its a text input
-                case 'text':
-                    echo '<input type="' . $type . '" name="' . $name . '" placeholder="' . $placeholder . '" />';
-                    break;
                 //If its a textarea  
                 case 'textarea':
                     echo '<textarea name="' . $name . '" placeholder="' . $placeholder . '"></textarea>';
+                    break;
+                case 'submit':
+                    echo '<input type="' . $type . '" name="' . $name . '" value="' . $placeholder . '" />';
+                    break;
+                default:
+                    echo '<input type="' . $type . '" name="' . $name . '" placeholder="' . $placeholder . '" />';
                     break;
             }
             

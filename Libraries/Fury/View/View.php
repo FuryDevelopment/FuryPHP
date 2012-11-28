@@ -47,11 +47,11 @@
             //Setup the main variables in the framework:
             //----------------------------------------------
             $this->smarty->assign('site_title', SITE_TITLE);
-            $this->smarty->assign('url', SITE_URL);
+            $this->smarty->assign('url',        SITE_URL);
             $this->smarty->assign('static_url', STATIC_URL);
-            $this->smarty->assign('css_dir', CSS_DIR);
-            $this->smarty->assign('img_dir', IMG_DIR);
-            $this->smarty->assign('js_Dir', JS_DIR);
+            $this->smarty->assign('css_dir',    CSS_DIR);
+            $this->smarty->assign('img_dir',    IMG_DIR);
+            $this->smarty->assign('js_Dir',     JS_DIR);
             //----------------------------------------------
 
             //Allow the developer to set variables in the app config:

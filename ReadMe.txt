@@ -5,7 +5,7 @@
 #                               #
 #################################
 
-Current Version: 1.0.9 Development
+Current Version: 1.0.9 VC3
 
 Release Information:
 
@@ -26,6 +26,15 @@ Release Information:
      	{$css_dir}    -> Returns Ex. http://localhost/static/css/
      	{$img_dir} 	  -> Returns Ex. http://localhost/static/images/
      	{$js_dir} 	  -> Returns Ex. http://localhost/static/js/
+    - HTML Class updated:
+     - Added support for the "submit" input type.
+    - Classes called within the model extension class are all lowercase now.
+     - $this->session
+     - $this->sql
+     - $this->data
+     - $this->view
+    - HTML calling within the template file has changed:
+     - Now call the HTML class via: {html::css('example')} <- Notice the lowercase "h".
 
 Known Issues:
 	- Non-Compatible with PHP 5.4.9

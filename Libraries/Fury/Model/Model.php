@@ -20,11 +20,11 @@
         //Setup multiple variables we need:
         public $showHeader = true; //Option to show header
         public $showFooter = true; //Option to show footer.
-        public $showView   = true;
-        public $session    = null;
-        public $data       = null;
-        public $view       = null;
-        public $sql        = null;
+        public $showView   = true; //Option to show view
+        public $session    = null; //Session class
+        public $data       = null; //Data class
+        public $view       = null; //View class
+        public $sql        = null; //Database Manager
         
         /**
          * Class constructor. This will setup
@@ -32,10 +32,11 @@
          **/
         public function __construct()
         {
+            //Load the Data class
             TaskManager::LoadClass('Data', 'Model/Data');
-            $this->data = new Data;
-            $this->view = new View;
-            $this->sql  = new DatabaseManager;
+            $this->data = new Data; //Initialize
+            $this->view = new View; //Initialize
+            $this->sql  = new DatabaseManager; //Initialize
         }
     
         /**
@@ -94,10 +95,15 @@
          
         public function useSessions($sessions, $dbsave)
         {
+            //If sessions are enabled
             if($sessions)
             {
+                //Load the session class
                 TaskManager::LoadClass('Session', 'Model/Session');
+                //Initialize it:
                 $this->session = new Session;
+                //Start the session and set whether
+                //we are using the database or not.
                 $this->session->StartSession($dbsave);
             }
         }
@@ -108,6 +114,7 @@
          **/
         public function set($var, $value)
         {
+            //Set a new smarty template variable.
             $this->view->smarty->assign($var, $value);
         }
         
